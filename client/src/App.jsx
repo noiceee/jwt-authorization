@@ -40,10 +40,20 @@ function App() {
     })
   }
 
-  function handleDelete(uname){
+  const axiosJWT = axios.create();
+  axiosJWT.interceptors.request.use(function (config) {
+    // Do something before request is sent
     refreshToken();
-    console.log(user);
-    axios.delete(
+    return config;
+  }, function (error) {
+    // Do something with request error
+    return Promise.reject(error);
+  });
+
+
+  function handleDelete(uname){
+    console.table(user);
+    axiosJWT.delete(
       "/users/"+uname,
       {
         headers:{authorization:"bearer "+user.accessToken}

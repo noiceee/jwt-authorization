@@ -81,7 +81,7 @@ app.post("/api/refresh", (req, res)=>{
 
 const verify = (req, res, next)=>{
     const token = req.headers.authorization;
-    console.log(token);
+    console.log(`authToken : ${token}`);
     if(token){
         const authToken  = token.split(" ")[1];
         jwt.verify(authToken, "chhotaSaRaaz", (err, user)=>{
